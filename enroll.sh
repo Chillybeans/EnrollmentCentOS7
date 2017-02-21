@@ -34,6 +34,6 @@ realm join --user=_svc_compadd --one-time-password=R@wadd00 G-STAR.RAW
 #Deny access to everyone
 realm deny --all
 #Allow the RDP group
-realm permit -g G-STAR.RAW\\rdp-$HOSTNAME
+realm permit -g G-STAR.RAW\\ADM-OMS-$HOSTNAME
 #Give them sudo permission
-echo "%rdp-$HOSTNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+echo "%ADM-OMS-$HOSTNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers

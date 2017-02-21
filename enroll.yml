@@ -46,6 +46,9 @@
     - name: Run Install script Python Pip
       shell: python get-pip.py
       
+    - name: Install Pexpect using Pip
+      shell: /bin/bash -c "pip install pexpect"
+      
     - name: Join system to Domain
       expect:
         command: /bin/bash -c "/usr/sbin/realm join G-STAR.RAW --use=_svc_compadd"

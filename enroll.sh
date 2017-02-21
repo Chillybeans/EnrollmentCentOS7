@@ -28,7 +28,7 @@ sudo yum install "kernel-devel-uname-r == $(uname -r)"
 ./vmware-install.pl -d default
 
 #Install packages needed for domain join
-yum -y install realmd sssd oddjob oddjob-mkhomedir adcli samba-common
+yum -y -q install realmd sssd oddjob oddjob-mkhomedir adcli samba-common
 #Join Domain
 realm join --user=_svc_compadd --one-time-password=R@wadd00 G-STAR.RAW
 #Deny access to everyone

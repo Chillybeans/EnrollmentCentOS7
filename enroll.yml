@@ -1,5 +1,20 @@
-- name: Hello World Sample
-  hosts: all
+---
+## This playbook installs and configures AD authentication
+
+- name: Install and configure AD authentication
+  hosts: linux
+  remote_user: root
+
   tasks:
-	- name: Create directory to mount temporary shares to
-	  shell: /bin/bash -c "mkdir /mnt/tmp"
+    - name: install ad_auth required tools
+      yum: pkg={{ item }} state=installed
+      with_items:
+        - realmd
+        - sssd
+        - oddjob-mkhomedir
+        - adcli
+        - samba-common-tools
+        - python-pip
+
+    - name: install pexpect using pip
+      shell: /bin/bash -c "pip install pexpect"

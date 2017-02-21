@@ -1,7 +1,7 @@
 !#/bin/sh
 
 #Create directory to mount temporary shares to
-mkdir /mnt/temp
+mkdir /mnt/tmp
 
 #disable firewalld service and stop it from starting at boot
 service firwalld stop
@@ -29,11 +29,3 @@ yum -y -q install "kernel-devel-uname-r == $(uname -r)"
 
 #Install packages needed for domain join
 yum -y -q install realmd sssd oddjob oddjob-mkhomedir adcli samba-common
-#Join Domain
-realm join --user=_svc_compadd --one-time-password=R@wadd00 G-STAR.RAW
-#Deny access to everyone
-realm deny --all
-#Allow the RDP group
-realm permit -g G-STAR.RAW\\ADM-OMS-$HOSTNAME
-#Give them sudo permission
-echo "%ADM-OMS-$HOSTNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers

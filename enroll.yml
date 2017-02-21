@@ -14,4 +14,10 @@
      
     - name:  copy VMWARE Tools Installation
       shell: /bin/bash -c "cd /mnt/tmp/Server/Linux"
-   
+      
+    - name: copy VMWare Tools Installation
+      shell: /bin/bash -c "mkdir /tmp"
+      
+    - name: copy VMWare Tools Installation
+      shell: /bin/bash -c "cp VMwareTools-9.0.15-2323214.tar.gz /tmp"
+      

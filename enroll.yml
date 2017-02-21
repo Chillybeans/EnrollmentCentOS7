@@ -2,7 +2,7 @@
 ## This playbook installs and configures AD authentication
 
 - name: Install and configure AD authentication
-  hosts: linux
+  hosts: all
   remote_user: root
 
   tasks:

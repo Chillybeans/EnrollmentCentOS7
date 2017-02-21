@@ -69,8 +69,8 @@
       
     - name: LineinFile change FQDN required for logins
       lineinfile:
-        path: /etc/sssd/sssd.conf
-        regexp: 'use_fully_qualified_names = True'
+        destfile: /etc/sssd/sssd.conf
+        regexp: '^use_fully_qualified_names = True'
         line: 'use_fully_qualified_names = False'
       
     - name: restart sssd to process changes

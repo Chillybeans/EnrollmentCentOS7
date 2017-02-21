@@ -1,5 +1,7 @@
-- name: Hello World Sample
-  hosts: all
+- name: Install and configure AD authentication
+  hosts: linux
+  remote_user: root
+  
   tasks:
-   - name: Create directory to mount temporary shares to
-    shell: /bin/bash -c "mkdir /mnt/tmp"
+    - name: Create directory to mount temporary shares to
+        shell: /bin/bash -c "mkdir /mnt/tmp"   

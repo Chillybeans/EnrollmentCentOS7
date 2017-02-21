@@ -21,18 +21,18 @@
       ignore_errors: yes
       
     - name: copy VMWare Tools Installation
-      shell: /bin/bash -c "cp VMwareTools-9.0.15-2323214.tar.gz /tmp"
+      shell: /bin/bash -c "cp /mnt/tmp/Server/Linux/VMwareTools-9.0.15-2323214.tar.gz /tmp"
       ignore_errors: yes
       
     - name: untar and run
       shell: /bin/bash -c "cd /tmp"
       
     - name: untar and run
-      shell: /bin/bash -c "tar -zxvf VMwareTools-9.0.15-2323214.tar.gz"
+      shell: /bin/bash -c "tar -zxvf /tmp/VMwareTools-9.0.15-2323214.tar.gz"
       ignore_errors: yes
       
     - name: untar and run
-      shell: /bin/bash -c "cd vmware-tools-distrib"
+      shell: /bin/bash -c "cd /tmp/vmware-tools-distrib"
       
     - name: untar and run
       shell: /bin/bash -c "yum -y -q install perl gcc make kernel-headers kernel-devel -y"
@@ -41,7 +41,7 @@
       shell: /bin/bash -c "yum -y -q install 'kernel-devel-uname-r == $(uname -r)'"
       
     - name: untar and run
-      shell: /bin/bash -c "./vmware-install.pl -d default"
+      shell: /bin/bash -c "/tmp/vmware-install.pl -d default"
       
     - name: Install packages needed to join domain
       shell: /bin/bash -c "yum -y -q install realmd sssd oddjob oddjob-mkhomedir adcli samba-common"

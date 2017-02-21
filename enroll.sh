@@ -22,9 +22,9 @@ cp VMwareTools-9.0.15-2323214.tar.gz /tmp
 cd /tmp
 tar -zxvf VMwareTools-9.0.15-2323214.tar.gz
 cd vmware-tools-distrib
-yum install perl gcc make kernel-headers kernel-devel -y
+yum -y -q install perl gcc make kernel-headers kernel-devel -y
 rpm -ql kernel-headers
-sudo yum install "kernel-devel-uname-r == $(uname -r)"
+yum -y -q install "kernel-devel-uname-r == $(uname -r)"
 ./vmware-install.pl -d default
 
 #Install packages needed for domain join

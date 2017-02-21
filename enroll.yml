@@ -6,7 +6,8 @@
   remote_user: root
 
   tasks:
-    - lineinfile:
+    - name: change FQDN requirement logins
+      lineinfile:
         destfile: /etc/sssd/sssd.conf
         regexp: '^use_fully_qualified_names = True'
         line: 'use_fully_qualified_names = False'

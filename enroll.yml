@@ -1,7 +1,10 @@
+---
+## This playbook installs and configures AD authentication
+
 - name: Install and configure AD authentication
-  hosts: linux
+  hosts: all
   remote_user: root
-  
+
   tasks:
-    - name: Create directory to mount temporary shares to
-        shell: /bin/bash -c "mkdir /mnt/tmp"   
+    - name: install pexpect using pip
+      shell: /bin/bash -c "pip install pexpect"

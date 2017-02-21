@@ -1,0 +1,4 @@
+- name: Run Enroll script
+  hosts: all
+  tasks:
+    - script: enroll.sh

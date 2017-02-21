@@ -1,5 +1,5 @@
 - name: Create directory to mount temporary shares to
-shell: mkdir /mnt/tmp
+shell: /bin/bash -c "mkdir /mnt/tmp"
 
 - name: disable firewalld service and stop it from starting at boot
 shell: service firwalld stop

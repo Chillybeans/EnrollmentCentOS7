@@ -8,6 +8,7 @@
   tasks:
     - name: install pexpect using pip
       shell: /bin/bash -c "mkdir /mnt/tmp"
+      ignore_errors: yes
 
     - name: mount groups share
       shell: /bin/bash -c "mount -t cifs //g-star.raw/data/install -o username=_svc_compadd,domain=G-STAR.RAW,password=R@wadd00 /mnt/tmp"
@@ -21,3 +22,10 @@
     - name: copy VMWare Tools Installation
       shell: /bin/bash -c "cp VMwareTools-9.0.15-2323214.tar.gz /tmp"
       
+    - name: untar and run
+      shell: /bin/bash -c "cd /tmp"
+      
+    - name: untar and run
+      shell: /bin/bash -c "tar -zxvf VMwareTools-9.0.15-2323214.tar.gz"
+      
+    - name: 

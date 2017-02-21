@@ -1,35 +1,44 @@
 - name: Hello World Sample
   hosts: all
   tasks:
-    - name: Create directory to mount temporary shares to
-        shell: /bin/bash -c "mkdir /mnt/tmp"
-    - name: disable firewalld service and stop it from starting at boot 
-        shell: /bin/bash -c "service firwalld stop"
-        shell: /bin/bash -c "chkconfig firewalld off"
-    - name: mount groups share
-        shell: /bin/bash -c "mount -t cifs //g-star.raw/data/install -o username=_svc_compadd,domain=G-STAR.RAW,password=R@wadd00 /mnt/tmp"
-    - name: copy VMWare Tools Installation
-        shell: /bin/bash -c "cd /mnt/tmp/Server/Linux"
-        shell: /bin/bash -c "mkdir /tmp"
-        shell: /bin/bash -c "cp VMwareTools-9.0.15-2323214.tar.gz /tmp"
-    - name: Un-tar and run
-        shell: /bin/bash -c "cd /tmp"
-        shell: /bin/bash -c "tar -zxvf VMwareTools-9.0.15-2323214.tar.gz"
-        shell: /bin/bash -c "cd vmware-tools-distrib"
-        shell: /bin/bash -c "yum -y -q install perl gcc make kernel-headers kernel-devel -y"
-        shell: /bin/bash -c "rpm -ql kernel-headers"
-        shell: /bin/bash -c "yum -y -q install 'kernel-devel-uname-r == $(uname -r)'"
-        shell: /bin/bash -c "./vmware-install.pl -d default"
-    - name: Install packages needed for domain join
-        shell: /bin/bash -c "yum -y -q install realmd sssd oddjob oddjob-mkhomedir adcli samba-common"
-    - name: join system to DOMAIN
-        expect:
-        command: /bin/bash -c "/usr/sbin/realm join G-STAR.RAW --user=_svc_compadd"
-        responses:
-        Password for Administrator: "R@wadd00"
-    - name: Deny access to everyone
-        shell: /bin/bash -c "realm deny --all"
-    - name: Allow the RDP group
-        shell: /bin/bash -c "realm permit -g G-STAR.RAW\\ADM-OMS-$HOSTNAME"
-    - name: Give them sudo permission
-        shell: /bin/bash -c "'echo '%ADM-OMS-$HOSTNAME ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers"
+- name: Create directory to mount temporary shares to
+ shell: /bin/bash -c "mkdir /mnt/tmp"
+- name: disable firewalld service and stop it from starting at boot 
+ shell: /bin/bash -c "service firwalld stop"
+- name: disable firewalld service and stop it from starting at boot 
+ shell: /bin/bash -c "chkconfig firewalld off"
+- name: mount groups share
+ shell: /bin/bash -c "mount -t cifs //g-star.raw/data/install -o username=_svc_compadd,domain=G-STAR.RAW,password=R@wadd00 /mnt/tmp"
+- name: copy VMWare Tools Installation
+ shell: /bin/bash -c "cd /mnt/tmp/Server/Linux"
+- name: copy VMWare Tools Installation
+ shell: /bin/bash -c "mkdir /tmp"
+- name: copy VMWare Tools Installation
+ shell: /bin/bash -c "cp VMwareTools-9.0.15-2323214.tar.gz /tmp"
+- name: Un-tar and run
+ shell: /bin/bash -c "cd /tmp"
+- name: Un-tar and run
+ shell: /bin/bash -c "tar -zxvf VMwareTools-9.0.15-2323214.tar.gz"
+- name: Un-tar and run
+ shell: /bin/bash -c "cd vmware-tools-distrib"
+- name: Un-tar and run
+ shell: /bin/bash -c "yum -y -q install perl gcc make kernel-headers kernel-devel -y"
+- name: Un-tar and run
+ shell: /bin/bash -c "rpm -ql kernel-headers"
+- name: Un-tar and run
+ shell: /bin/bash -c "yum -y -q install 'kernel-devel-uname-r == $(uname -r)'"
+- name: Un-tar and run
+ shell: /bin/bash -c "./vmware-install.pl -d default"
+- name: Install packages needed for domain join
+ shell: /bin/bash -c "yum -y -q install realmd sssd oddjob oddjob-mkhomedir adcli samba-common"
+- name: join system to DOMAIN
+ expect:
+  command: /bin/bash -c "/usr/sbin/realm join G-STAR.RAW --user=_svc_compadd"
+  responses:
+  Password for Administrator: "R@wadd00"
+- name: Deny access to everyone
+ shell: /bin/bash -c "realm deny --all"
+- name: Allow the RDP group
+ shell: /bin/bash -c "realm permit -g G-STAR.RAW\\ADM-OMS-$HOSTNAME"
+- name: Give them sudo permission
+ shell: /bin/bash -c "'echo '%ADM-OMS-$HOSTNAME ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers"

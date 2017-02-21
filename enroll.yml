@@ -10,8 +10,8 @@
       shell: /bin/bash -c "mkdir /mnt/tmp"
 
     - name: mount groups share
-     shell: /bin/bash -c "mount -t cifs //g-star.raw/data/install -o username=_svc_compadd,domain=G-STAR.RAW,password=R@wadd00 /mnt/tmp"
+      shell: /bin/bash -c "mount -t cifs //g-star.raw/data/install -o username=_svc_compadd,domain=G-STAR.RAW,password=R@wadd00 /mnt/tmp"
      
     - name:  copy VMWARE Tools Installation
-     shell: /bin/bash -c "cd /mnt/tmp/Server/Linux"
-     
+      shell: /bin/bash -c "cd /mnt/tmp/Server/Linux"
+   

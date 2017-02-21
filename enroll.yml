@@ -1,4 +1,38 @@
-- name: Run Enroll script
-  hosts: all
-  tasks:
-    - script: enroll.sh
+- name: Create directory to mount temporary shares to
+shell: mkdir /mnt/tmp
+
+- name: disable firewalld service and stop it from starting at boot
+shell: service firwalld stop
+shell: chkconfig firewalld off
+
+- name: create directory to mount CDROM drive to
+
+- name: mount groups share
+shell: mount -t cifs //g-star.raw/data/install -o username=_svc_compadd,domain=G-STAR.RAW,password=R@wadd00 /mnt/tmp
+- name: copy VMWare Tools Installation
+shell: cd /mnt/tmp/Server/Linux
+shell: mkdir /tmp
+shell: cp VMwareTools-9.0.15-2323214.tar.gz /tmp
+
+- name: Un-tar and run
+shell: cd /tmp
+shell: tar -zxvf VMwareTools-9.0.15-2323214.tar.gz
+shell: cd vmware-tools-distrib
+shell: yum -y -q install perl gcc make kernel-headers kernel-devel -y
+shell: rpm -ql kernel-headers
+shell: yum -y -q install "kernel-devel-uname-r == $(uname -r)"
+shell: ./vmware-install.pl -d default
+
+- name: Install packages needed for domain join
+shell: yum -y -q install realmd sssd oddjob oddjob-mkhomedir adcli samba-common
+    - name: join system to DOMAIN
+      expect:
+        command: /bin/bash -c "/usr/sbin/realm join G-STAR.RAW --user=_svc_compadd"
+        responses:
+          Password for Administrator: "R@wadd00"
+- name: Deny access to everyone
+shell: realm deny --all
+- name: Allow the RDP group
+shell: realm permit -g G-STAR.RAW\\ADM-OMS-$HOSTNAME
+- name: Give them sudo permission
+shell: echo "%ADM-OMS-$HOSTNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers

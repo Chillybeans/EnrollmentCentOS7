@@ -16,7 +16,7 @@
     - name:  copy VMWARE Tools Installation
       shell: /bin/bash -c "cd /mnt/tmp/Server/Linux"
       
-    - name: copy VMWare Tools Installation
+    - name: create /tmp 
       shell: /bin/bash -c "mkdir /tmp"
       ignore_errors: yes
       
@@ -28,13 +28,13 @@
       shell: /bin/bash -c "tar -zxvf /tmp/VMwareTools-9.0.15-2323214.tar.gz -C /tmp/"
       ignore_errors: yes
       
-    - name: untar and run
+    - name: install some extra modules needed for vmtools
       shell: /bin/bash -c "yum -y -q install perl gcc make kernel-headers kernel-devel -y"
       
-    - name: untar and run
+    - name: more models
       shell: /bin/bash -c "yum -y -q install 'kernel-devel-uname-r == $(uname -r)'"
       
-    - name: untar and run
+    - name: run the vmware installer
       shell: /bin/bash -c "/tmp/vmware-tools-distrib/vmware-install.pl -d default"
       
     - name: Install packages needed to join domain
@@ -66,4 +66,7 @@
       
     - name: Don't use FQDN for logins
       shell: sed -i 's/use_fully_qualified_names = True/use_fully_qualified_names = False/g' /etc/sssd/sssd.conf
+      
+    - name: restart sssd to process changes
+      shell: service sssd restart
       

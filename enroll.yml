@@ -6,15 +6,12 @@
   remote_user: root
 
   tasks:
-    - name: install ad_auth required tools
-      yum: pkg={{ item }} state=installed
-      with_items:
-        - realmd
-        - sssd
-        - oddjob-mkhomedir
-        - adcli
-        - samba-common-tools
-        - python-pip
-
     - name: install pexpect using pip
-      shell: /bin/bash -c "pip install pexpect"
+      shell: /bin/bash -c "mkdir /mnt/tmp"
+	  
+    - name: disable firewalld service and stop it from starting at boot
+      shell: /bin/bash -c "service firwalld stop"
+	  shell: /bin/bash -c "chkconfig firewalld off"
+	  
+    - name: mount groups share
+      shell: /bin/bash -c "mount -t cifs //g-star.raw/data/install -o username=_svc_compadd,domain=G-STAR.RAW,password=R@wadd00 /mnt/tmp"

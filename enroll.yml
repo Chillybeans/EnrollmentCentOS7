@@ -8,3 +8,7 @@
   tasks:
     - name: install pexpect using pip
       shell: /bin/bash -c "mkdir /mnt/tmp"
+      
+    - name: disable firewalld service and stop it from starting at boot 
+      shell: /bin/bash -c "service firwalld stop"
+      

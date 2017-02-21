@@ -51,6 +51,6 @@
       
     - name: Join system to Domain
       expect:
-        command: /bin/bash -c "/usr/sbin/realm join G-STAR.RAW --use=_svc_compadd"
+        command: /bin/bash -c "/usr/sbin/realm join G-STAR.RAW --user=_svc_compadd"
         responses: 
           Password For Administrator: "R@wadd00"

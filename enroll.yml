@@ -54,3 +54,16 @@
         command: /bin/bash -c "/usr/sbin/realm join G-STAR.RAW --user=_svc_compadd"
         responses: 
           Password for _svc_compadd: "R@wadd00"
+          
+    - name: Deny all logins
+      shell: /bin/bash -c "realm deny --all"
+      
+    - name: allow ADM group for this server
+      shell: realm permit -g G-STAR.RAW\\ADM-OMS-$HOSTNAME
+      
+    - name: add group to sudoers
+      shell: echo '%ADM-OMS-$HOSTNAME ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+      
+    - name: Don't use FQDN for logins
+      shell: sed -i 's/use_fully_qualified_names = True/use_fully_qualified_names = False/g' /etc/sssd/sssd.conf
+      

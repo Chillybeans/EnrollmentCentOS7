@@ -40,6 +40,12 @@
     - name: Install packages needed to join domain
       shell: /bin/bash -c "yum -y -q install realmd sssd oddjob oddjob-mkhomedir adcli samba-common"
       
+    - name: Download Python Pip install script
+      shell: curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+      
+    - name: Run Install script Python Pip
+      shell: python get-pip.py
+      
     - name: Join system to Domain
       expect:
         command: /bin/bash -c "/usr/sbin/realm join G-STAR.RAW --use=_svc_compadd"

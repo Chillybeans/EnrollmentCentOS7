@@ -53,4 +53,4 @@
       expect:
         command: /bin/bash -c "/usr/sbin/realm join G-STAR.RAW --user=_svc_compadd"
         responses: 
-          Password For _svc_compadd: "R@wadd00"
+          Password for _svc_compadd: "R@wadd00"

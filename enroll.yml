@@ -6,7 +6,7 @@
   remote_user: root
 
   tasks:
-    - name: install pexpect using pip
+    - name: create tmp directory
       shell: /bin/bash -c "mkdir /mnt/tmp"
       ignore_errors: yes
 
@@ -74,4 +74,6 @@
       service:
         name: sssd
         state: restarted
-      
+        
+    - name: umount the group share
+      shell: umount /mnt/tmp
